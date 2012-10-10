@@ -1,0 +1,39 @@
+import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+public class Main{
+
+	
+	
+public static void main(String[] args){
+	try
+	{
+		Robot r=new Robot();
+		r.delay(1000  *  5);
+		/* *
+		r.keyPress(KeyEvent.VK_TAB);
+		for(;;){
+			
+		System.out.println(r.getPixelColor(MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y).toString());
+	//	r.createScreenCapture(new Rectangle());
+		r.delay(1000);
+		}
+		*/
+		
+		for(;;){
+			r.delay(100);
+			r.keyPress(KeyEvent.VK_ENTER);
+			r.keyRelease(KeyEvent.VK_ENTER);
+			r.mousePress(InputEvent.BUTTON1_MASK);
+			r.mouseRelease(InputEvent.BUTTON1_MASK);
+		}
+		
+	} catch (AWTException e)
+	{
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+}
+
+}

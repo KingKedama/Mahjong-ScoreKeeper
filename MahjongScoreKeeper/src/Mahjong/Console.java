@@ -147,7 +147,7 @@ public class Console
 				}
 			}
 			in.close();
-			if (!everyone.containsKey(POT))
+			if (!everyone.containsKey(POT.toLowerCase()))
 			{
 				newplayer(new String[]
 				{ "", POT });

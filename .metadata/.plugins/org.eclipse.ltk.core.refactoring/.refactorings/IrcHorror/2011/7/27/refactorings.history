@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;args&apos; in &apos;board.Board.readBoardFile(...)&apos; to &apos;flags&apos;&#x0D;&#x0A;- Original project: &apos;IrcHorror&apos;&#x0D;&#x0A;- Original element: &apos;board.Board.readBoardFile(String).args&apos;&#x0D;&#x0A;- Renamed element: &apos;args&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;args&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;board{Board.java[Board~readBoardFile~QString;@args!639!714!649!652!\[QString;" name="flags" references="true" stamp="1309480102550" version="1.0"/>
+</session>

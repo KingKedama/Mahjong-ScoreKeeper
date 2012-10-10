@@ -1,0 +1,49 @@
+import java.util.LinkedList;
+
+
+public class Player {
+	public String name;
+	public int score;
+	public int tournyscore; 
+	public LinkedList<Moneys> money;
+	
+	public Player(String n,int s,Moneys[] m)
+	{
+		name=n;
+		score=s;
+		tournyscore=0;
+		money=new LinkedList<Moneys>();
+		if(m==null)
+			tournyscore=-100;
+		else
+			for(Moneys mon : m)
+			{
+				money.add(mon);
+				tournyscore+=mon.amount;
+			}
+		
+		
+	}
+	
+	//return value is the amount that was taken for tourny purposes
+	//only use this function when money is going to a tourny person
+	public int scorechange(int amount)
+	{
+		int temp=tournyscore;
+		if(tournyscore >=0)
+		{
+			if(tournyscore+amount >=0)
+			{
+				tournyscore=tournyscore+amount;
+				return -amount;
+			}
+			else
+			{
+				tournyscore=-100;
+				System.out.println(name +"was knocked out of the tourny\r\n");
+				return temp;
+			}
+		}
+		return 0;
+	}
+}

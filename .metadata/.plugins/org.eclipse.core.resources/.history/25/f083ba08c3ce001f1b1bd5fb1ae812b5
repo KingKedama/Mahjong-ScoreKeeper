@@ -1,0 +1,58 @@
+import java.util.LinkedList;
+
+
+public class Player {
+	public String name;
+	public int score;
+	public int tournyscore; 
+	public LinkedList<Moneys> money;
+	private Console printer;
+	
+	public Player(String n,int s,Moneys[] m,Console c)
+	{
+		printer=c;
+		name=n;
+		score=s;
+		tournyscore=0;
+		money=new LinkedList<Moneys>();
+		if(m==null)
+			tournyscore=-100;
+		else
+			for(Moneys mon : m)
+			{
+				money.add(mon);
+				tournyscore+=mon.amount;
+			}
+		
+		
+	}
+	
+	//return the linked list containing the Moneys(value and original owner) taken for tourny purposes
+	//only use this function when money is going to a tourny person
+	public LinkedList<Moneys> scorechange(int am,String player)
+	{
+		LinkedList<Moneys> ret=new LinkedList<Moneys>();
+		if(tournyscore >=0)
+		{
+			int amount=am;
+			while(amount > 0)
+			{
+				if(!money.isEmpty())
+				{
+					
+				}
+				else
+				{
+					tournyscore = -100;
+					amount =0;
+				}
+			}
+			//some stuff
+			
+			if(tournyscore <0)
+				printer.PrintMessage(name +"was knocked out of the tourny\r\n");
+			
+		}
+		return ret;
+	}
+}

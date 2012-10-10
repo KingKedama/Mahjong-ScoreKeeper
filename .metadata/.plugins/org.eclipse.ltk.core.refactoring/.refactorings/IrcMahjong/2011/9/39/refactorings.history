@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;mahjong.bots.OneSuitBot&apos; to &apos;IrcMahjongBot&apos;&#x0D;&#x0A;- Original project: &apos;IrcMahjong&apos;&#x0D;&#x0A;- Original element: &apos;mahjong.bots.OneSuitBot&apos;&#x0D;&#x0A;- Renamed element: &apos;mahjong.bots.IrcMahjongBot&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;OneSuitBot&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;mahjong.bots{OneSuitBot.java[OneSuitBot" matchStrategy="1" name="IrcMahjongBot" qualified="false" references="true" similarDeclarations="false" stamp="1316886402675" textual="false" version="1.0"/>
+</session>
