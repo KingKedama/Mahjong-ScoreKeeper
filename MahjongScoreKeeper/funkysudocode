@@ -1,0 +1,23 @@
+read in every game to records
+read in every player to palyerpos
+
+records= list of games in order by start time
+index[#of games] = hand we are at in each game
+playerpos[num of players]=corresponding hand in each players data file
+for each recorded game( ordered by start time)
+	while(g.handsleft)
+	{
+		evaluatehand(g);
+	}
+
+evaluatehand(g)
+{
+	for(each player in hand)
+	{
+		while(p.hand==correction)
+			deal with correction, advance phand
+		if p.hand != g.hand  
+			evaluatehand(p.hand.game);
+		
+	}
+}
