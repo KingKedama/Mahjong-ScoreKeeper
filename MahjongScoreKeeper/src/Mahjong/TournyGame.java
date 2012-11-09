@@ -179,9 +179,9 @@ public class TournyGame
 		for (int i = 0; i < players.length; i++)
 		{
 			if (i == dealer)
-				take(winner, players[i], 2 * value + 100 * bonus);
+				take(winner, players[i], 2 * value + 100 * bonus,false);
 			else
-				take(winner, players[i], value + 100 * bonus);
+				take(winner, players[i], value + 100 * bonus,false);
 		}
 		if (players[dealer] == winner)
 			bonus++;
@@ -203,12 +203,12 @@ public class TournyGame
 		int value = handvalue(hou, han);
 		if (winner == players[dealer])
 		{
-			take(winner, loser, 6 * value + 300 * bonus);
+			take(winner, loser, 6 * value + 300 * bonus,true);
 			bonus++;
 		}
 		else
 		{
-			take(winner, loser, 4 * value + 300 * bonus);
+			take(winner, loser, 4 * value + 300 * bonus,true);
 			bonus = 0;
 			nexthand();
 		}
@@ -264,10 +264,10 @@ public class TournyGame
 		{
 			if (tenpai[0] == players[dealer])
 				move = false;
-			take(tenpai[0], players[0], 1000);
-			take(tenpai[0], players[1], 1000);
-			take(tenpai[0], players[2], 1000);
-			take(tenpai[0], players[3], 1000);
+			take(tenpai[0], players[0], 1000,false);
+			take(tenpai[0], players[1], 1000,false);
+			take(tenpai[0], players[2], 1000,false);
+			take(tenpai[0], players[3], 1000,false);
 
 		}
 		else if (tenpai.length == 2)
@@ -287,8 +287,8 @@ public class TournyGame
 						lose2 = players[i];
 					}
 			}
-			take(tenpai[0], lose1, 1500);
-			take(tenpai[1], lose2, 1500);
+			take(tenpai[0], lose1, 1500,false);
+			take(tenpai[1], lose2, 1500,false);
 		}
 		else if (tenpai.length == 3)
 		{
@@ -303,9 +303,9 @@ public class TournyGame
 				p = players[2];
 			else if (players[3] != tenpai[0] && players[3] != tenpai[1] && players[3] != tenpai[2])
 				p = players[3];
-			take(tenpai[0], p, 1000);
-			take(tenpai[1], p, 1000);
-			take(tenpai[2], p, 1000);
+			take(tenpai[0], p, 1000,false);
+			take(tenpai[1], p, 1000,false);
+			take(tenpai[2], p, 1000,false);
 
 		}
 		else if (tenpai.length == 4)
@@ -321,12 +321,12 @@ public class TournyGame
 		printnextround();
 	}
 
-	protected void take(Player winner, Player loser, int amount)
+	protected void take(Player winner, Player loser, int amount,boolean ron)
 	{
 		if (amount % 100 != 0)
 			amount = amount + 100 - (amount % 100);
 		String claimer=winner.name;
-		if(!winner.in){
+		if(!winner.in || !ron){
 			claimer=Console.POT;
 		}
 		if(winner.score < 0){
