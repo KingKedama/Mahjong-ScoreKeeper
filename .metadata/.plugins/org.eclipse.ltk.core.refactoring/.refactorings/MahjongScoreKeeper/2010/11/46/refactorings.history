@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename field &apos;MON&apos; in &apos;Mahjong.Irc.Tile&apos; to &apos;MAN&apos;&#x0A;- Original project: &apos;MahjongScoreKeeper&apos;&#x0A;- Original element: &apos;Mahjong.Irc.Tile.MON&apos;&#x0A;- Renamed element: &apos;Mahjong.Irc.Tile.MAN&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;MON&apos;" flags="589830" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;Mahjong.Irc{Tile.java[Tile^MON" name="MAN" references="true" setter="false" stamp="1289184913377" textual="false" version="1.0"/>
-</session>

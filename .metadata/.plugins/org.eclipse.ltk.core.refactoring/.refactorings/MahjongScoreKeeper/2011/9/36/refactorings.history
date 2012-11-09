@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename local variable &apos;next&apos; in &apos;Mahjong.Console.endgame(...)&apos; to &apos;place&apos;&#x0A;- Original project: &apos;MahjongScoreKeeper&apos;&#x0A;- Original element: &apos;Mahjong.Console.endgame(String[]).next&apos;&#x0A;- Renamed element: &apos;next&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;next&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;Mahjong{Console.java[Console~endgame~\[QString;@next!19749!19759!19753!19756!I" name="place" references="true" stamp="1314913463292" version="1.0"/>
-</session>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename method &apos;Player.writemoney()&apos; to &apos;writestack&apos;&#x0A;- Original project: &apos;MahjongScoreKeeper&apos;&#x0A;- Original element: &apos;Player.writemoney()&apos;&#x0A;- Renamed element: &apos;Player.writestack()&apos;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;writemoney&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;{Player.java[Player~writemoney" name="writestack" references="true" stamp="1286982857086" version="1.0"/>
-</session>

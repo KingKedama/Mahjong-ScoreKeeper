@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;Musicbot&apos; to &apos;AppleBot&apos;&#x0A;- Original project: &apos;ApplesToBots&apos;&#x0A;- Original element: &apos;Musicbot&apos;&#x0A;- Renamed element: &apos;AppleBot&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Musicbot&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{Musicbot.java[Musicbot" matchStrategy="1" name="AppleBot" qualified="false" references="true" similarDeclarations="false" stamp="1281153518248" textual="false" version="1.0"/>
-</session>
