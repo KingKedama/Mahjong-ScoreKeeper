@@ -1127,7 +1127,7 @@ public class Console
 			int temp = 0;
 			for (Moneys m : p.money)
 			{
-				if (m.owner.equals(name))
+				if (m.owner.equalsIgnoreCase(name))
 					temp += m.amount;
 			}
 			if (temp != 0)
