@@ -107,20 +107,23 @@ public class Console
 			printscore(split);
 		else if (split[0].equalsIgnoreCase("top"))
 			topn(split);
-		else if (split[0].equals("3game"))
+		else if (split[0].equalsIgnoreCase("3game"))
 			ThreePlayer(split, command);
-		else if (split[0].equals("end"))
+		else if (split[0].equalsIgnoreCase("end"))
 			this.endgame(split);
-		else if (split[0].equals("help"))
+		else if (split[0].equalsIgnoreCase("help"))
 			help(split);
-		else if (split[0].equals("take"))
+		else if (split[0].equalsIgnoreCase("take"))
 			this.take(split);
-		else if (split[0].equals("printstack"))
+		else if (split[0].equalsIgnoreCase("printstack"))
 			this.printstack(split);
-		else if (split[0].equals("stacksum"))
+		else if (split[0].equalsIgnoreCase("stacksum"))
 			this.stacksum(split);
-		else if (split[0].equals("findmoney"))
+		else if (split[0].equalsIgnoreCase("findmoney"))
 			this.findmoney(split);
+		else if (split[0].equalsIgnoreCase("status")){
+			printStatus(split);
+		}
 		else if (command.trim().equals(""))
 		{
 		}
@@ -147,7 +150,7 @@ public class Console
 				}
 			}
 			in.close();
-			if (!everyone.containsKey(POT.toLowerCase()))
+			if (getPlayer(POT)==null)
 			{
 				newplayer(new String[]
 				{ "", POT });
@@ -1137,9 +1140,20 @@ public class Console
 		PrintMessage("total: " + total);
 	}
 
+	public void printStatus(String[] split){
+		if (split.length != 2){
+			//TODO print syntax
+			return;
+		}
+		TournyGame g= games.get(split[1]);
+		if(g== null){
+			PrintMessage(split[1]+" is not a current game");
+			return;
+		}
+		g.printStatus();
+	}
 	// take [receiver] [amount] [giver]
 	public final String TAKESYNTAX = "Syntax:take [game] [receiver] [amount] [giver]";
-
 	public void take(String[] split)
 	{
 		if (split.length != 5)
@@ -1148,20 +1162,18 @@ public class Console
 			return;
 		}
 		Player receiver, giver;
-		if (everyone.containsKey(split[2]))
-		{
+		
 			receiver = getPlayer(split[2]);
-		}
-		else
+		
+		if(receiver == null)
 		{
 			PrintMessage(split[2] + " does not exist");
 			return;
 		}
-		if (everyone.containsKey(split[4]))
-		{
+		
 			giver = getPlayer(split[4]);
-		}
-		else
+		
+		if(giver == null)
 		{
 			PrintMessage(split[4] + " does not exist");
 			return;
@@ -1205,11 +1217,9 @@ public class Console
 			return;
 		}
 		Player receiver;
-		if (everyone.containsKey(split[1]))
-		{
-			receiver = getPlayer(split[1]);
-		}
-		else
+		receiver = getPlayer(split[1]);
+		
+		if(receiver== null)
 		{
 			PrintMessage(split[1] + " does not exist");
 			return;
@@ -1244,11 +1254,10 @@ public class Console
 			return;
 		}
 		Player giver;
-		if (everyone.containsKey(split[1]))
-		{
+		
 			giver = getPlayer(split[1]);
-		}
-		else
+		
+		if (giver==null)
 		{
 			PrintMessage(split[1] + " does not exist");
 			return;

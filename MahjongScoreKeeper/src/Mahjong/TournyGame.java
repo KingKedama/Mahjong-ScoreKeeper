@@ -108,14 +108,38 @@ public class TournyGame
 		updategame();
 	}
 
+	//has no 'change' or to 
+	public void printStatus(){
+		Formatter fmt = new Formatter();
+		int e, s, w, n;
+		e= gamescore(players[EAST]);
+		s =gamescore(players[SOUTH]);
+		w =gamescore(players[WEST]);
+		n= gamescore(players[NORTH]);
+		fmt.format("%12s %12s %12s %12s %12s", pround, players[0].name, players[1].name, players[2].name, players[3].name);
+		main.PrintMessage(fmt.toString());
+		fmt = new Formatter();
+		fmt.format("%12s %12s %12s %12s %12s", "score", e, s, w, n);
+		main.PrintMessage(fmt.toString());
+		fmt = new Formatter();
+		fmt.format("%12s %12s", "riichi " + riichi, "bonus " + bonus);
+		main.PrintMessage(fmt.toString());
+		for(Player p: players)
+		{
+			if(gamescore(p) < 1000)
+			{
+				main.PrintMessage(p.name+" cannot riichi");
+			}
+		}
+	}
 	public void printgamestatus()
 	{
 		Formatter fmt = new Formatter();
 		int e, s, w, n;
-		e = players[EAST].score - start[EAST] + 25000;
-		s = players[SOUTH].score - start[SOUTH] + 25000;
-		w = players[WEST].score - start[WEST] + 25000;
-		n = players[NORTH].score - start[NORTH] + 25000;
+		e= gamescore(players[EAST]);
+		s =gamescore(players[SOUTH]);
+		w =gamescore(players[WEST]);
+		n= gamescore(players[NORTH]);
 
 		fmt.format("%12s %12s %12s %12s %12s", pround, players[0].name, players[1].name, players[2].name, players[3].name);
 		main.PrintMessage(fmt.toString());

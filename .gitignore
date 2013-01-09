@@ -7,3 +7,4 @@ masterlist.txt
 results.txt
 *.stack
 *.csv
+*detail.txt
