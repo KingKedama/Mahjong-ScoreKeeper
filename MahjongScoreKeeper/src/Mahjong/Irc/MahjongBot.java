@@ -134,6 +134,13 @@ public class MahjongBot extends PircBot
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.joinChannel(channel);
+		boolean done=false;
+		while(!done){
+			try{
+				joinChannel(channel);
+			done=true;
+			}
+			catch(Exception e){}
+		}
 	}
 }

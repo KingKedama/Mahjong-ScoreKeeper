@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.io.*;
 
-public class Console
+public class Console 
 {
 	public Scanner in;
 	public HashMap<String, Player> everyone;
@@ -30,7 +30,7 @@ public class Console
 		Console c = new Console();
 		c.mainLoop();
 
-	}
+	}//blah
 
 	public Console()
 	{

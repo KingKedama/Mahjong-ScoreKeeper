@@ -27,6 +27,7 @@ public class IrcConsole extends Console {
 			}
 			catch(Exception e){}
 		}
+		c.SetBot(b);
 		c.mainLoop();
 		
 		
@@ -42,13 +43,15 @@ public class IrcConsole extends Console {
 		else{
 			new Exception().printStackTrace();
 		}
-		if(sender==null){
-		bot.sendMessage(bot.channel, mess);
+		if(bot != null)
+		{
+			if(sender==null){
+			bot.sendMessage(bot.channel, mess);
+			}
+			else{
+				bot.sendMessage(sender, mess);
+			}
 		}
-		else{
-			bot.sendMessage(sender, mess);
-		}
-		
 		System.out.println(mess);
 	}
 	
