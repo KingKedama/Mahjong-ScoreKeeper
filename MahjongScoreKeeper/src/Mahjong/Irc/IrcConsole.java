@@ -3,14 +3,23 @@ package Mahjong.Irc;
 import Mahjong.Console;
 
 public class IrcConsole extends Console {
-
+	
 	public MahjongBot bot;
 	public String sender="";
 	public static void main(String[] args) {
+		if (args.length < 3){
+			System.out.println("Syntax: [nick] [server] [channel]");
+			return;
+		}
 		IrcConsole c = new IrcConsole();
+		for(String s:args){
+			System.out.println(s);
+		}
+		String name= args[0];
+		String server=args[1];
+		String channel=args[2];
 		
-		
-		MahjongBot b = new MahjongBot("irc.rizon.net",6667,null,"ScoreKeeper",c,"#ddrmtu");
+		MahjongBot b = new MahjongBot(server,6667,null,name,c,channel);
 		boolean done=false;
 		while(!done){
 			try{
