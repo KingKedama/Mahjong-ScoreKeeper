@@ -53,8 +53,8 @@ public class CalculatingConsole extends Console
 		con=c;
 		players=p;
 		
-		LinkedList<Moneys> tem=new LinkedList<Moneys>();
-		tem.add(new Moneys("Correct",TOURNY));
+		LinkedList<Points> tem=new LinkedList<Points>();
+		tem.add(new Points("Correct",TOURNY));
 		correction=new Player("Correct",25000,tem,this);
 		con.everyone.put("Correct", correction);
 		for(Integer i:index)
@@ -74,13 +74,13 @@ public class CalculatingConsole extends Console
 			{
 			Player play=(Player)(con.everyone.get(command));
 			System.out.println(play.name+": "+play.score);
-			System.out.println(play.money.toString());
+			System.out.println(play.points.toString());
 			
 			for(String name:everyone.keySet())
 			{
 				
 				int temp=0;
-				for(Moneys m:play.money)
+				for(Points m:play.points)
 				{
 					if(m.owner.equals(name))
 						temp+=m.amount;
@@ -116,7 +116,7 @@ public class CalculatingConsole extends Console
 			}
 			else if (split[0].equals("ron") || split[0].equalsIgnoreCase("doubleron") || split[0].equalsIgnoreCase("tsumo") || split[0].equalsIgnoreCase("tenpai"))
 			{
-				TournyGame t=(TournyGame)(con.games.get(split[1]));
+				Game t=(Game)(con.games.get(split[1]));
 				for(Player p :t.players )
 				{
 					updatePlayer(players.get(p.name),g);
@@ -281,7 +281,7 @@ public class CalculatingConsole extends Console
 				}
 				if (!games.containsKey(name))
 				{
-					TournyGame m = new TournyGame(e, s, w, n, this, filename, false);
+					Game m = new Game(e, s, w, n, this, filename, false);
 					games.put(name, m);
 					m.updatedetail(command);
 				}
@@ -320,12 +320,12 @@ public class CalculatingConsole extends Console
 			{
 				if (!p.in)
 				{
-					LinkedList<Moneys> money=new LinkedList<Moneys>();
-					money.add(new Moneys(p.name,TOURNY));
+					LinkedList<Points> money=new LinkedList<Points>();
+					money.add(new Points(p.name,TOURNY));
 					p.in=true;
 					p.give(money,"");
-					money=new LinkedList<Moneys>();
-					money.add(new Moneys(p.name,TOPOT));
+					money=new LinkedList<Points>();
+					money.add(new Points(p.name,TOPOT));
 					pot.give(money,"");
 					PrintMessage("added " + p.name + " to tourny");
 				}

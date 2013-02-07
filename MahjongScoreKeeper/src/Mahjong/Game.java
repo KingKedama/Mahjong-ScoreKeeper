@@ -4,10 +4,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-public class TournyGame
+public class Game
 {
 	public int riichi;
-	public LinkedList<Moneys> triichi;
+	public LinkedList<Points> triichi;
 	public Player[] players; // east,south,west,north
 	public static int EAST = 0;
 	public static int SOUTH = 1;
@@ -25,7 +25,7 @@ public class TournyGame
 	
 	public boolean switched;
 
-	public TournyGame(Player east, Player south, Player west, Player north, Console c, String n, boolean r)
+	public Game(Player east, Player south, Player west, Player north, Console c, String n, boolean r)
 	{
 		players = new Player[4];
 		namedate = n;
@@ -39,7 +39,7 @@ public class TournyGame
 		dealer = round = EAST;
 		record = r;
 		bonus = 0;
-		triichi = new LinkedList<Moneys>();
+		triichi = new LinkedList<Points>();
 		main = c;
 		pround = "East 0";
 		prev = new int[4];
@@ -376,7 +376,7 @@ public class TournyGame
 		int index = position(oldguy);
 		int gamescore = p.score - start[index] + 25000;
 
-		if (!(this instanceof NTGame))
+		if (!(this instanceof FreeplayGame))
 		{
 			players[index] = newguy;
 			prev[index] = newguy.score;
@@ -454,8 +454,8 @@ public class TournyGame
 		for (Player p : riichis)
 		{
 			
-				LinkedList<Moneys> temp = p.take(1000, p.name,namedate);
-				for (Moneys m : temp)
+				LinkedList<Points> temp = p.take(1000, p.name,namedate);
+				for (Points m : temp)
 					triichi.add(m);
 				riichi++;
 		}

@@ -7,7 +7,7 @@ import java.util.Formatter;
 import java.util.Vector;
 
 
-public class ThreeGame extends NTGame {
+public class ThreeGame extends FreeplayGame {
 
 	public ThreeGame(Player east, Player south, Player west, Player north,
 			Console c, String n, boolean r) {

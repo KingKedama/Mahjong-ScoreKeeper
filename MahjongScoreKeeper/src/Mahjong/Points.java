@@ -1,10 +1,10 @@
 package Mahjong;
 
-public class Moneys
+public class Points
 {
 	public String owner;
 	public int amount;
-	public Moneys(String s, int a)
+	public Points(String s, int a)
 	{
 		owner=s;
 		amount=a;

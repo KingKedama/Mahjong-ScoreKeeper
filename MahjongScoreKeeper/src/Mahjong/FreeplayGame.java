@@ -1,8 +1,8 @@
 package Mahjong;
 
-public class NTGame extends TournyGame{
+public class FreeplayGame extends Game{
 
-	public NTGame(Player east, Player south, Player west, Player north,
+	public FreeplayGame(Player east, Player south, Player west, Player north,
 			Console c, String n, boolean r) {
 		super(east, south, west, north, c, n, r);
 		switched=true;

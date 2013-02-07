@@ -8,7 +8,7 @@ public class Console
 {
 	public Scanner in;
 	public HashMap<String, Player> everyone;
-	public HashMap<String, TournyGame> games;
+	public HashMap<String, Game> games;
 	public Vector<Player> norder;
 	public Player pot;
 	public static String POT = "Void";
@@ -35,7 +35,7 @@ public class Console
 	public Console()
 	{
 		everyone = new HashMap<String, Player>();
-		games = new HashMap<String, TournyGame>();
+		games = new HashMap<String, Game>();
 		norder = new Vector<Player>();
 		if (!new File("masterlist.txt").exists())
 		{
@@ -119,8 +119,8 @@ public class Console
 			this.printstack(split);
 		else if (split[0].equalsIgnoreCase("stacksum"))
 			this.stacksum(split);
-		else if (split[0].equalsIgnoreCase("findmoney"))
-			this.findmoney(split);
+		else if (split[0].equalsIgnoreCase("findpoints"))
+			this.findpoints(split);
 		else if (split[0].equalsIgnoreCase("status")){
 			printStatus(split);
 		}
@@ -238,7 +238,7 @@ public class Console
 		{
 			in = new BufferedReader(new FileReader(name + ".stack"));
 			String str;
-			LinkedList<Moneys> m = new LinkedList<Moneys>();
+			LinkedList<Points> m = new LinkedList<Points>();
 			while ((str = in.readLine()) != null)
 			{
 				String[] split = str.split(" ");
@@ -246,7 +246,7 @@ public class Console
 				{
 					try
 					{
-						m.add(new Moneys(split[0], new Integer(split[1])));
+						m.add(new Points(split[0], new Integer(split[1])));
 					} catch (NumberFormatException e)
 					{
 						PrintMessage("failed to read " + name + ".stack: " + "file contains errors");
@@ -367,7 +367,7 @@ public class Console
 			PrintMessage("failed to write to " + filename);
 			return;
 		}
-		TournyGame m = new TournyGame(e, s, w, n, this, filename, true);
+		Game m = new Game(e, s, w, n, this, filename, true);
 		games.put(name, m);
 		m.updatedetail(command);
 
@@ -390,12 +390,12 @@ public class Console
 				return;
 			}
 			p.in = true;
-			LinkedList<Moneys> money = new LinkedList<Moneys>();
+			LinkedList<Points> money = new LinkedList<Points>();
 			p.score = 0;
-			money.add(new Moneys(p.name, TOURNY));
+			money.add(new Points(p.name, TOURNY));
 			p.give(money,"");
-			money = new LinkedList<Moneys>();
-			money.add(new Moneys(p.name, TOPOT));
+			money = new LinkedList<Points>();
+			money.add(new Points(p.name, TOPOT));
 			pot.give(money,"");
 			p.writecsv("tourny", "tourny");
 			PrintMessage("added " + p.name + " to tourny");
@@ -410,7 +410,7 @@ public class Console
 			PrintMessage("Syntax:!tsumo [game] [winner] [hou] [han|y|dy]");
 			return;
 		}
-		TournyGame m = (TournyGame) games.get(split[1]);
+		Game m = (Game) games.get(split[1]);
 		if (m == null)
 		{
 			PrintMessage(split[1] + " is not a game");
@@ -454,7 +454,7 @@ public class Console
 			PrintMessage("Syntax:!ron [game] [winner] [hou] [han|y|dy] [loser]");
 			return;
 		}
-		TournyGame m = (TournyGame) games.get(split[1]);
+		Game m = (Game) games.get(split[1]);
 		if (m == null)
 		{
 			PrintMessage(split[1] + " is not a valid game");
@@ -492,7 +492,7 @@ public class Console
 
 	public void tenpai(String[] split, String command)
 	{
-		TournyGame m = (TournyGame) games.get(split[1]);
+		Game m = (Game) games.get(split[1]);
 		if (m == null)
 		{
 			PrintMessage(split[1] + " is not a game");
@@ -519,7 +519,7 @@ public class Console
 			PrintMessage("Syntax:!riichi [game] [player]");
 			return;
 		}
-		TournyGame m = (TournyGame) games.get(split[1]);
+		Game m = (Game) games.get(split[1]);
 		if (m == null)
 		{
 			PrintMessage(split[1] + "is not a game");
@@ -545,7 +545,7 @@ public class Console
 			PrintMessage("Syntax:!switch [game] [oldplayer] [newplayer]");
 			return;
 		}
-		TournyGame m = (TournyGame) games.get(split[1]);
+		Game m = (Game) games.get(split[1]);
 		if (m == null)
 		{
 			PrintMessage(split[1] + " is not an existing game");
@@ -557,7 +557,7 @@ public class Console
 		{
 			return;
 		}
-		if (!(m instanceof NTGame))
+		if (!(m instanceof FreeplayGame))
 		{
 			Player p2 =getPlayer(split[3]);
 			if (p2 == null)
@@ -587,7 +587,7 @@ public class Console
 			System.out.println("Syntax:!doubleron [game] [winner1] [hou] [han|y|dy] [winner2] [hou] [han|y|dy] [loser]");
 			return;
 		}
-		TournyGame m = (TournyGame) games.get(split[1]);
+		Game m = (Game) games.get(split[1]);
 		if (m == null)
 		{
 			PrintMessage(split[1] + " is not an existing game");
@@ -646,7 +646,7 @@ public class Console
 			PrintMessage("Syntax:!round [game] [east|south|west|north|#]");
 			return;
 		}
-		TournyGame m = (TournyGame) games.get(split[1]);
+		Game m = (Game) games.get(split[1]);
 		if (m == null)
 		{
 			PrintMessage(split[1] + " is not an existing game");
@@ -681,7 +681,7 @@ public class Console
 			PrintMessage("Syntax:!bonus [game] [#]");
 			return;
 		}
-		TournyGame m = (TournyGame) games.get(split[1]);
+		Game m = (Game) games.get(split[1]);
 		if (m == null)
 		{
 			PrintMessage(split[1] + " is not an existing game");
@@ -712,7 +712,7 @@ public class Console
 			PrintMessage("Syntax:!dealer [game] [name]");
 			return;
 		}
-		TournyGame m = (TournyGame) games.get(split[1]);
+		Game m = (Game) games.get(split[1]);
 		if (m == null)
 		{
 			PrintMessage(split[1] + " is not an existing game");
@@ -785,7 +785,7 @@ public class Console
 			return;
 		}
 
-		TournyGame m = new NTGame(e, s, w, n, this, filename, false);
+		Game m = new FreeplayGame(e, s, w, n, this, filename, false);
 		games.put(name, m);
 		m.updatedetail(command);
 
@@ -805,7 +805,7 @@ public class Console
 		}
 
 		PrintMessage("ending game " + split[1]);
-		TournyGame game=games.get(split[1]);
+		Game game=games.get(split[1]);
 		if (game.riichi > 0){
 			pot.give(game.triichi,"");
 		}
@@ -1020,7 +1020,7 @@ public class Console
 			return;
 		}
 
-		TournyGame m = new ThreeGame(e, s, w, this, filename);
+		Game m = new ThreeGame(e, s, w, this, filename);
 		games.put(name, m);
 		m.updatedetail(command);
 
@@ -1073,7 +1073,7 @@ public class Console
 		}
 		int cur = 0;
 		String s = "";
-		for (Moneys m : p.money)
+		for (Points m : p.points)
 		{
 			if (cur >= LINESIZE)
 			{
@@ -1106,7 +1106,7 @@ public class Console
 		for (String name : everyone.keySet())
 		{
 			int temp = 0;
-			for (Moneys m : p.money)
+			for (Points m : p.points)
 			{
 				if (m.owner.equals(name))
 					temp += m.amount;
@@ -1116,11 +1116,11 @@ public class Console
 		}
 	}
 
-	public void findmoney(String[] split)
+	public void findpoints(String[] split)
 	{
 		if (split.length != 2)
 		{
-			PrintMessage("Syntax:!findmoney [player]");
+			PrintMessage("Syntax:!findpoints [player]");
 			return;
 		}
 		String name = split[1];
@@ -1128,7 +1128,7 @@ public class Console
 		for (Player p : everyone.values())
 		{
 			int temp = 0;
-			for (Moneys m : p.money)
+			for (Points m : p.points)
 			{
 				if (m.owner.equalsIgnoreCase(name))
 					temp += m.amount;
@@ -1145,7 +1145,7 @@ public class Console
 			//TODO print syntax
 			return;
 		}
-		TournyGame g= games.get(split[1]);
+		Game g= games.get(split[1]);
 		if(g== null){
 			PrintMessage(split[1]+" is not a current game");
 			return;
@@ -1232,8 +1232,8 @@ public class Console
 				PrintMessage("amounts must be positive");
 				return;
 			}
-			LinkedList<Moneys> temp = new LinkedList<Moneys>();
-			temp.add(new Moneys(split[3], amount));
+			LinkedList<Points> temp = new LinkedList<Points>();
+			temp.add(new Points(split[3], amount));
 			receiver.writecsv("give", temp.toString());
 			receiver.give(temp,"");
 		} catch (NumberFormatException e)
@@ -1270,7 +1270,7 @@ public class Console
 				PrintMessage("amounts must be positive");
 				return;
 			}
-			LinkedList<Moneys> temp = giver.take(amount, split[3],"");
+			LinkedList<Points> temp = giver.take(amount, split[3],"");
 			giver.writecsv("destroy", amount + ":" + temp.toString());
 			PrintMessage(temp.toString() + " was destroyed");
 		} catch (NumberFormatException e)

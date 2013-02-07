@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class Player {
 	public String name;
 	public int score; 
-	public LinkedList<Moneys> money;
+	public LinkedList<Points> points;
 	private Console printer;
 	public boolean in;
 	
@@ -20,21 +20,21 @@ public class Player {
 	public int winnnings;//not always accurate, only updated when topn is called
 	public int prize;
 	
-	public Player(String n,int s,LinkedList<Moneys> m,Console c)
+	public Player(String n,int s,LinkedList<Points> m,Console c)
 	{
 		printer=c;
 		name=n;
 		score=s;
-		money=m;
+		points=m;
 		in=true;
 		if(m==null){
 			in=false;
-			money=new LinkedList<Moneys>();
+			points=new LinkedList<Points>();
 		}
 		else if(score >=0)
 		{
 			score=0;//should be unnessary, but checks that the entered score was accurate
-			for(Moneys mon : m)
+			for(Points mon : m)
 			{
 				score+=mon.amount;
 			}
@@ -113,42 +113,42 @@ public class Player {
 	
 	public int ownMoney()
 	{
-		if(money.isEmpty())
+		if(points.isEmpty())
 			return 0;
-		if(!money.getFirst().owner.equals(name))
+		if(!points.getFirst().owner.equals(name))
 			return 0;
-		return money.getFirst().amount;
+		return points.getFirst().amount;
 	}
 	//return the linked list containing the Moneys(value and original owner) taken for tourny purposes
-	public LinkedList<Moneys> take(int am,String player,String game)
+	public LinkedList<Points> take(int am,String player,String game)
 	{
 		if(this==printer.pot && score < am)//the pot will always give itself money out of air rather than go negative
 		{
-			LinkedList<Moneys> temp=new LinkedList<Moneys>();
-			temp.add(new Moneys(this.name,am-score));
+			LinkedList<Points> temp=new LinkedList<Points>();
+			temp.add(new Points(this.name,am-score));
 			this.give(temp,game);
 		}
-		LinkedList<Moneys> ret=new LinkedList<Moneys>();
+		LinkedList<Points> ret=new LinkedList<Points>();
 		score-=am;
 			int amount=am;
 			while(amount > 0)
 			{
-				if(!money.isEmpty())
+				if(!points.isEmpty())
 				{
-					Moneys take=money.getLast();
-					for(Moneys m : money)
+					Points take=points.getLast();
+					for(Points m : points)
 						if(m.owner.equals(player))
 							take=m;
 					if(take.amount > amount)
 					{
-						ret.add(new Moneys(take.owner,amount));
+						ret.add(new Points(take.owner,amount));
 						take.amount-=amount;
 						amount=0;
 					}
 					else
 					{
 						ret.add(take);
-						money.remove(take);
+						points.remove(take);
 						amount-=take.amount;
 					}
 				}
@@ -163,11 +163,11 @@ public class Player {
 		return ret;
 	}
 	
-	public void give(LinkedList<Moneys> points,String game)
+	public void give(LinkedList<Points> points,String game)
 	{
 		if(!in)
 		{
-			for(Moneys m:points)
+			for(Points m:points)
 			{
 				score+=m.amount;
 			}
@@ -187,17 +187,17 @@ public class Player {
 				score+=amount;
 				if(debt >= amount)//this only makes you less negative
 				{
-					LinkedList<Moneys> temp=new LinkedList<Moneys>();
+					LinkedList<Points> temp=new LinkedList<Points>();
 					temp.add(points.removeFirst());
 					printer.pot.give(temp,game);
 				}
 				else //you are being pushed positive
 				{
-					LinkedList<Moneys> temp=new LinkedList<Moneys>();
-					temp.add(new Moneys(points.getFirst().owner,debt));
+					LinkedList<Points> temp=new LinkedList<Points>();
+					temp.add(new Points(points.getFirst().owner,debt));
 					printer.pot.give(temp,game);
 					score=0;
-					points.addFirst(new Moneys(points.removeFirst().owner,amount-debt));
+					points.addFirst(new Points(points.removeFirst().owner,amount-debt));
 				}
 			}
 			else
@@ -205,7 +205,7 @@ public class Player {
 				score+=points.getFirst().amount;
 				if (points.getFirst().owner.equals(name))// it is your money
 				{
-					if (!money.isEmpty() && money.getFirst().owner.equals(name))// you
+					if (!points.isEmpty() && points.getFirst().owner.equals(name))// you
 																				// still
 																				// have
 																				// some
@@ -214,22 +214,22 @@ public class Player {
 																				// own
 																				// money
 					{
-						money.getFirst().amount += points.getFirst().amount;
+						points.getFirst().amount += points.getFirst().amount;
 					}
 					else
 					{
-						money.addFirst(points.getFirst());
+						points.addFirst(points.getFirst());
 					}
 				}
 				else
 				{
-					if (!money.isEmpty() && points.getFirst().owner.equals(money.getLast().owner))
+					if (!points.isEmpty() && points.getFirst().owner.equals(points.getLast().owner))
 					{
-						money.getLast().amount += points.getFirst().amount;
+						points.getLast().amount += points.getFirst().amount;
 					}
 					else
 					{
-						money.add(points.getFirst());
+						points.add(points.getFirst());
 					}
 				}
 				points.removeFirst();
@@ -269,7 +269,7 @@ public class Player {
 		try
 		{
 			BufferedWriter out = new BufferedWriter(new FileWriter(name+".stack", true));
-			for(Moneys m: money)
+			for(Points m: points)
 			{
 				out.write(m.owner+" "+m.amount+"\r\n");
 			}
@@ -309,7 +309,7 @@ public class Player {
 		
 	}
 	public void fixvalues(String game){
-		for(TournyGame g: printer.games.values()){
+		for(Game g: printer.games.values()){
 			if(g.namedate !=game){
 				if(g.position(name) !=-1){
 					g.start[g.position(name)]=score-g.prev[g.position(name)]+g.start[g.position(name)];
